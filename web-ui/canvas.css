@@ -1,0 +1,29 @@
+body {
+  padding: 50px;
+}
+
+#timeline {
+  padding-top: 20px;
+  min-height: 250px;
+}
+
+#metrics {
+  margin-top: 20px;
+}
+
+#metric1, #metric2, #metric3 {
+  float: left;
+  width: 33%;
+}
+
+#table {
+  margin-top: 20px;
+}
+
+#table th, #table td {
+  border: 1px solid #ccc;
+}
+
+#table th {
+  background-color: #F7F7F7;
+}

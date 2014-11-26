@@ -1,0 +1,28 @@
+<html>
+<head>
+  <script src="http://localhost:8080/joola.js?APIToken=apitoken-demo"></script>
+</head>
+<body>
+<div id="timeline"></div>
+<script>
+  joola.on('ready', function () {
+    $('#timeline').Timeline({
+      query: {
+        timeframe: 'last_30_minutes',
+        interval: 'minute',
+        dimensions: ['timestamp'],
+        metrics: ['count'],
+        collection: 'requests'
+      },
+      chart: {
+        chart: {
+          type: 'line'
+        }
+      }
+    });
+  });
+  //2nd, rt
+</script>
+</body>
+</html>
+    

@@ -1,0 +1,91 @@
+<html>
+<head>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="canvas.css">
+  <script src="http://localhost:8080/joola.js?APIToken=apitoken-demo&debug.enabled=true"></script>
+</head>
+<body>
+<div>
+  <div id="canvas">
+    <div id="datepicker"></div>
+    <div class="clearfix"></div>
+    <div id="timeline"></div>
+    <div id="metrics" class="clearfix">
+      <div id="metric1"></div>
+      <div id="metric2"></div>
+      <div id="metric3"></div>
+    </div>
+    <div id="table"></div>
+  </div>
+</div>
+<script>
+  joola.on('ready', function () {
+    $('#canvas').Canvas({
+      key: 'canvas',
+      datepicker: {
+        container: '#datepicker'
+      },
+      visualizations: {
+        timeline: {
+          type: 'timeline',
+          container: '#timeline',
+          chart: {
+            chart: {
+              type: 'line'
+            }
+          },
+          query: {
+            dimensions: ['timestamp'],
+            metrics: ['count', {key: 'duration_ms', aggregation: 'avg', decimals: 2, suffix: ' ms'}],
+            collection: 'requests'
+          }
+        },
+        metric1: {
+          type: 'metric',
+          container: '#metric1',
+          caption: 'requests',
+          query: {
+            metrics: ['count'],
+            collection: 'requests'
+          }
+        },
+        metric2: {
+          type: 'metric',
+          container: '#metric2',
+          caption: 'Avg. duration',
+          query: {
+            metrics: [
+              {key: 'duration_ms', aggregation: 'avg', decimals: 2, suffix: ' ms'}
+            ],
+            collection: 'requests'
+          }
+        },
+        metric3: {
+          type: 'metric',
+          container: '#metric3',
+          caption: 'Visitors',
+          query: {
+            metrics: [
+              {key: 'visitors', aggregation: 'ucount', dependsOn: 'ip'}
+            ],
+            collection: 'requests'
+          }
+        },
+        table: {
+          type: 'table',
+          container: '#table',
+          query: {
+            dimensions: ['device.family', 'agent.family'],
+            metrics: ['count', {key: 'duration_ms', aggregation: 'avg', decimals: 2, suffix: ' ms'}, {key: 'visitors', aggregation: 'ucount', dependsOn: 'ip'}],
+            collection: 'requests'
+          },
+          limit: 50
+        }
+      }
+    });
+  });
+  //dim name
+  //ucount
+</script>
+</body>
+</html>
